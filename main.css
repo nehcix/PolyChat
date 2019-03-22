@@ -29,7 +29,9 @@ i,
 #navBar {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	padding: 20px 20px 40px 20px;
+	padding: 4vh;
+	padding-left: 20px;
+	padding-right: 20px;
 	background-color: #ddd;
 }
 
@@ -65,7 +67,7 @@ i,
 #chatNavBarRight {
 	border-right: 1px solid white;
 	color: white;
-	padding: 15px 15px 15px 15px;
+	padding: 2vh;
 }
 
 #chatNavBarLeft2ndLine {
@@ -90,8 +92,8 @@ i,
 }
 
 #messagesWrapper {
-	height: 60vh;
-	margin: 30px;
+	height: 65vh;
+	margin: 10px 20px;
 	display: grid;
 	overflow: scroll;
 	overflow-x: hidden;
@@ -125,7 +127,8 @@ i,
 	background-color: #ddd;
 	width: 250px;
 	/* display: grid; */
-	overflow-wrap: break-word;
+	/* overflow-wrap: break-word; */
+	word-break: break-all;
 }
 
 .messageSend {
@@ -142,7 +145,8 @@ i,
 	background-color: rgb(13, 98, 255);
 	width: 250px;
 	color: white;
-	overflow-wrap: break-word;
+	/* overflow-wrap: break-word; */
+	word-break: break-all;
 	display: grid;
 	justify-items: end;
 }
