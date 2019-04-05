@@ -20,7 +20,7 @@
 				<h1 style="color:dodgerblue;">Chat</h1>
 			</div>
 			<div id="navBarButtons">
-				<button><i class="fa fa-user"></i></button>
+				<button onclick="newUserConnection()"><i class="fa fa-user"></i></button>
 				<button><i class="fa fa-bell"></i></button>
 				<button><i class="fa fa-globe"></i></button>
 				<button><i class="fa fa-cog"></i></button>
@@ -45,8 +45,7 @@
 
 			<div id="messengerZone">
 				<div id="messagesWrapper">
-					<div id="messages">
-					</div>
+					<div id="messages"></div>
 				</div>
 				<div id="inputBox">
 					<button><i class="far fa-thumbs-up"></i></button>
@@ -55,11 +54,14 @@
 				</div>
 			</div>
 
-			<div id="listOfDiscussion"></div>
+			<div id="listOfChannels"></div>
 		</div>
 	</body>
 
 	<script src="channel.js"></script>
 	<script src="message.js"></script>
+	<script src="messagesObserver.js"></script>
+	<script src="channelsObserver.js"></script>
+	<script src="connectionHandler.js"></script>
 	<script src="main.js"></script>
 </html>

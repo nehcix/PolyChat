@@ -174,16 +174,16 @@ i,
 	color: white;
 }
 
-#listOfDiscussion {
+#listOfChannels {
 	padding: 20px;
 }
 
-#listOfDiscussion > * {
+#listOfChannels > * {
 	padding: 10px 25px;
 	background: #ddd;
 }
 
-#listOfDiscussion > :nth-child(odd) {
+#listOfChannels > :nth-child(odd) {
 	background-color: #eee;
 }
 
