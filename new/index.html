@@ -10,34 +10,41 @@
 			integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
 			crossorigin="anonymous"
 		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 
 	<body>
 		<div id="navBar">
 			<div id="logo">
-				<h1 style="color:darkorange;">Poly</h1>
-				<i class="fas fa-users" style="font-size: 0.9em;"></i>
-				<h1 style="color:dodgerblue;">Chat</h1>
+				<h1 id="Poly">Poly</h1>
+				<i id="PolyChatLogo" class="fas fa-users"></i>
+				<h1 id="Chat">Chat</h1>
 			</div>
 			<div id="navBarButtons">
-				<button onclick="newUserConnection()"><i class="fa fa-user"></i></button>
-				<button><i class="fa fa-bell"></i></button>
+				<button id="translateButton"></button>
+				<button id="user"><i class="fa fa-user"></i></button>
+				<button id="bell"><i class="fa fa-bell"></i></button>
 				<button><i class="fa fa-globe"></i></button>
 				<button><i class="fa fa-cog"></i></button>
+			</div>
+			<div id="navBarSecondLine">
+				<div id="currentUserWrapper">
+					<div id="currentUser"></div>
+				</div>
 			</div>
 		</div>
 
 		<div id="chatSection">
 			<div id="chatNavBar">
 				<div id="chatNavBarLeft">
-					<h6>Groupe actif :</h6>
-					<div id="chatNavBarLeft2ndLine"><h4 id="actifGroupe"></h4></div>
+					<h6 class="toTranslate" key="ActifChannel">Groupe actif :</h6>
+					<div id="chatNavBarLeft2ndLine"><h4 id="actifGroup"></h4></div>
 				</div>
 				<div id="chatNavBarRight">
-					<h6>Liste des groupes</h6>
+					<h6 class="toTranslate" key="ChannelList">Liste des groupes</h6>
 					<div id="chatNavBarRight2ndLine">
-						<h4>Groupes disponibles</h4>
-						<button><i class="fas fa-plus"></i></button>
+						<h4 class="toTranslate" key="AvailableChannels">Groupes disponibles</h4>
+						<button id="createChannel"><i class="fas fa-plus"></i></button>
 						<button><i class="fas fa-cog"></i></button>
 					</div>
 				</div>
@@ -48,18 +55,20 @@
 					<div id="messages"></div>
 				</div>
 				<div id="inputBox">
-					<button><i class="far fa-thumbs-up"></i></button>
+					<button id="thumbsUp"><i class="far fa-thumbs-up"></i></button>
 					<input id="inputToSend" type="text" />
-					<button id="sendButton">Envoyer</button>
+					<button id="sendButton" class="toTranslate" key="Send">Envoyer</button>
 				</div>
 			</div>
 
-			<div id="listOfChannels"></div>
+			<ul id="listOfChannels"></ul>
 		</div>
 	</body>
 
 	<script src="channel.js"></script>
 	<script src="message.js"></script>
+	<script src="messagesVue.js"></script>
+	<script src="channelsVue.js"></script>
 	<script src="messagesObserver.js"></script>
 	<script src="channelsObserver.js"></script>
 	<script src="connectionHandler.js"></script>

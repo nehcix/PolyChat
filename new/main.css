@@ -29,7 +29,7 @@ i,
 #navBar {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	padding: 4vh;
+	padding: 3vh;
 	padding-left: 20px;
 	padding-right: 20px;
 	background-color: #ddd;
@@ -39,16 +39,61 @@ i,
 	display: inline;
 	margin: 0px;
 }
-
-#navBarButtons {
-	align-self: center;
-	justify-self: end;
+#Poly {
+	cursor: pointer;
+	color: darkorange;
+}
+#PolyChatLogo {
+	cursor: pointer;
+	font-size: 0.9em;
+}
+#Chat {
+	cursor: pointer;
+	color: dodgerblue;
 }
 
+#navBarButtons {
+	align-self: flex-end;
+	justify-self: end;
+}
 #navBarButtons > button {
 	background-color: #ddd;
 	border: none;
 	font-size: 1.2em;
+}
+#user {
+	position: relative;
+	z-index: 10;
+}
+#navBarSecondLine {
+	grid-column: 2/3;
+	align-self: flex-start;
+	justify-self: end;
+}
+#currentUserWrapper {
+	position: relative;
+	right: 100px;
+	width: 50px;
+	display: grid;
+	justify-items: center;
+}
+#currentUser {
+	font-size: 0.8em;
+	color: green;
+}
+#badge {
+	position: relative;
+	right: 35px;
+	bottom: 25px;
+	height: 14px;
+	width: 14px;
+	border-radius: 50%;
+	font-size: 0.6em;
+	background-color: red;
+	color: white;
+	display: grid;
+	justify-content: center;
+	align-content: center;
 }
 
 #chatSection {
@@ -109,26 +154,54 @@ i,
 	color: #999;
 }
 
-.time {
-	font-size: 70%;
-	margin: 5px;
-	padding: 0 15px;
+.day {
+	font-size: 60%;
+	margin: 5px 0px;
+	padding-left: 20px;
 	font-style: italic;
 	color: #333;
 }
 
-.messageReceived {
-	/* height: fit-content; */
+.date {
+	font-size: 60%;
+	margin: 5px 0px;
+	padding: 0px;
+	font-style: italic;
+	color: #333;
+}
+
+.time {
+	padding-right: 20px;
+}
+
+.adminMessage {
+	margin-right: 10px;
+	display: grid;
+	justify-self: center;
+	justify-items: center;
+}
+
+.adminMessage > .content {
+	min-height: 18px;
+	border-radius: 20px;
+	padding: 0px 15px;
+	padding-bottom: 10px;
+	width: 250px;
+	color: #999;
+	word-break: normal;
+	display: grid;
+	justify-items: center;
 }
 
 .messageReceived > .content {
-	border-radius: 15px;
+	min-height: 18px;
+	border-radius: 20px;
 	padding: 10px 15px;
 	background-color: #ddd;
 	width: 250px;
 	/* display: grid; */
 	/* overflow-wrap: break-word; */
-	word-break: break-all;
+	word-break: normal;
 }
 
 .messageSend {
@@ -136,24 +209,18 @@ i,
 	display: grid;
 	justify-self: end;
 	justify-items: end;
-	/* height: fit-content; */
 }
 
 .messageSend > .content {
-	border-radius: 15px;
+	min-height: 18px;
+	border-radius: 20px;
 	padding: 10px 15px;
 	background-color: rgb(13, 98, 255);
 	width: 250px;
 	color: white;
-	/* overflow-wrap: break-word; */
-	word-break: break-all;
+	word-break: normal;
 	display: grid;
 	justify-items: end;
-}
-
-.messageSend > .time {
-	/* display: grid;
-	justify-items: end; */
 }
 
 #inputBox {
@@ -176,6 +243,9 @@ i,
 
 #listOfChannels {
 	padding: 20px;
+	height: 65vh;
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
 #listOfChannels > * {
@@ -197,10 +267,22 @@ i,
 
 #defaultTag {
 	font-size: 0.8em;
-	margin-left: 5px;
-	padding: 1px 10px;
+	margin-left: 10px;
+	padding: 1px 7px;
 	border: 1px solid rgb(73, 137, 255);
 	border-radius: 20px;
 	font-style: italic;
 	color: rgb(73, 137, 255);
+}
+
+#translateButton {
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.fa-star {
+	font-size: 0.8em;
 }
