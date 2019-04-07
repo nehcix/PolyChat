@@ -8,7 +8,6 @@ class ConnectionHandler {
 		this.lastAnswerFromServer;
 		sock.onmessage = event => {
 			this.lastAnswerFromServer = JSON.parse(event.data);
-			console.log(this.lastAnswerFromServer);
 
 			this.messagesObserver_.updateVue(this.lastAnswerFromServer);
 			this.channelsObserver_.updateVue(this.lastAnswerFromServer);
@@ -20,62 +19,58 @@ class ConnectionHandler {
 	}
 
 	sendInput() {
-		let message = new Message("onMessage", currentGroupId, inputToSend.value, userName, new Date());
+		let message = new Message(
+			"onMessage",
+			currentChannel.parentElement.id,
+			inputToSend.value,
+			userName,
+			new Date()
+		);
 		sock.send(JSON.stringify(message));
 	}
 
 	sendThumbsUp() {
-		let message = new Message("onMessage", currentGroupId, "👍🏻", userName, new Date());
+		let message = new Message("onMessage", currentChannel.parentElement.id, "👍🏻", userName, new Date());
 		sock.send(JSON.stringify(message));
 	}
 
-	// Since we can leave a groupe which is not active... we need theses loops
-	joinChannel(thisEl) {
-		let message = new Message("onJoinChannel", thisEl.parentElement.id, null, userName, new Date());
+	// Since we can leave a channel which is not active... we need theses loops
+	joinChannel(event) {
+		let message = new Message("onJoinChannel", event.parentElement.id, null, userName, new Date());
 		sock.send(JSON.stringify(message));
-		// this.channelsObserver_.activeGroup is on this new channel
-		this.changeActiveGroup(thisEl.parentElement.children[1]);
 		alert(
 			"You (" +
 				userName +
 				") have joined " +
-				thisEl.parentElement.children[1].innerHTML +
+				event.parentElement.children[1].innerHTML +
 				".\nVous (" +
 				userName +
 				") avez rejoint " +
-				thisEl.parentElement.children[1].innerHTML +
+				event.parentElement.children[1].innerHTML +
 				"."
 		);
+		currentChannel = event.parentElement.children[1];
+
+		message = new Message("onGetChannel", currentChannel.parentElement.id, null, userName, new Date());
+		sock.send(JSON.stringify(message));
 	}
 
-	leaveChannel(thisEl) {
-		let message = new Message("onLeaveChannel", thisEl.parentElement.id, null, userName, new Date());
+	leaveChannel(event) {
+		let message = new Message("onLeaveChannel", event.parentElement.id, null, userName, new Date());
 		sock.send(JSON.stringify(message));
-		// this.channelsObserver_.currentGroupId back to default channel which is General
-		this.changeActiveGroup();
 		alert(
 			"You (" +
 				userName +
 				") have leaved " +
-				thisEl.parentElement.children[1].innerHTML +
+				event.parentElement.children[1].innerHTML +
 				".\nVous (" +
 				userName +
 				") avez quitté " +
-				thisEl.parentElement.children[1].innerHTML +
+				event.parentElement.children[1].innerHTML +
 				"."
 		);
-	}
-
-	changeActiveGroup(thisEl) {
-		this.channelsObserver_.changeActiveGroup(thisEl);
-	}
-
-	changeActiveGroupWithVerification(thisEl) {
-		if (thisEl.attributes[2].value == "false") {
-			alert("You need to join this channel first !\nVous devez d'abord rejoindre ce groupe !");
-		} else {
-			this.channelsObserver_.changeActiveGroup(thisEl);
-		}
+		currentChannel = $(".chatChannel")[0].children[1];
+		this.channelsObserver_.messagesVue_.messagesPerChannel.delete(event.parentElement.id);
 	}
 
 	createChannel() {

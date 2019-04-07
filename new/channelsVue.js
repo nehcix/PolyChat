@@ -24,37 +24,43 @@ class ChannelsVue {
 	}
 
 	updateGeneral(element) {
-		let liChatGroup = document.createElement("li");
-		liChatGroup.classList.add("chatGroup");
-		liChatGroup.setAttribute("id", element.id);
+		let liChatChannel = document.createElement("li");
+		liChatChannel.classList.add("chatChannel");
+		liChatChannel.setAttribute("id", element.id);
 
 		let icon = document.createElement("i");
 		icon.classList.add("fas");
 		icon.classList.add("fa-star");
 
-		let spanGroupName = document.createElement("span");
-		spanGroupName.classList.add("groupName");
-		spanGroupName.setAttribute("onclick", "connectionHandler.changeActiveGroupWithVerification(this)");
-		spanGroupName.setAttribute("status", element.joinStatus);
-		spanGroupName.setAttribute("id", element.name);
-		spanGroupName.innerHTML = element.name;
+		let spanChannelName = document.createElement("span");
+		spanChannelName.classList.add("channelName");
+		// spanChannelName.setAttribute("onclick", "connectionHandler.changeActiveChannelWithVerification(this)");
+		spanChannelName.setAttribute("status", element.joinStatus);
+		spanChannelName.setAttribute("id", element.name);
+		spanChannelName.innerHTML = element.name;
 
 		let defaultTag = document.createElement("span");
 		defaultTag.classList.add("toTranslate");
 		defaultTag.setAttribute("id", "defaultTag");
 		defaultTag.setAttribute("key", "Default");
 
-		liChatGroup.appendChild(icon);
-		liChatGroup.appendChild(spanGroupName);
-		liChatGroup.appendChild(defaultTag);
-		listOfChannels.appendChild(liChatGroup);
+		let badgeDot = document.createElement("span");
+		badgeDot.setAttribute("id", "badge" + element.id);
+		badgeDot.classList.add("badgeDot");
+		badgeDot.style.display = "none";
+
+		liChatChannel.appendChild(icon);
+		liChatChannel.appendChild(spanChannelName);
+		liChatChannel.appendChild(defaultTag);
+		liChatChannel.appendChild(badgeDot);
+		listOfChannels.appendChild(liChatChannel);
 	}
 
 	updateJoined(element) {
-		let liChatGroup = document.createElement("li");
-		liChatGroup.classList.add("chatGroup");
-		liChatGroup.setAttribute("id", element.id);
-		liChatGroup.setAttribute("status", element.joinStatus);
+		let liChatChannel = document.createElement("li");
+		liChatChannel.classList.add("chatChannel");
+		liChatChannel.setAttribute("id", element.id);
+		liChatChannel.setAttribute("status", element.joinStatus);
 
 		let icon = document.createElement("i");
 		icon.classList.add("fas");
@@ -62,52 +68,67 @@ class ChannelsVue {
 		icon.classList.add("fa-minus");
 		icon.setAttribute("onclick", "connectionHandler.leaveChannel(this)");
 
-		let spanGroupName = document.createElement("span");
-		spanGroupName.classList.add("groupName");
-		spanGroupName.setAttribute("onclick", "connectionHandler.changeActiveGroupWithVerification(this)");
-		spanGroupName.setAttribute("status", element.joinStatus);
-		spanGroupName.setAttribute("id", element.name);
-		spanGroupName.innerHTML = element.name;
+		let spanChannelName = document.createElement("span");
+		spanChannelName.classList.add("channelName");
+		// spanChannelName.setAttribute("onclick", "connectionHandler.changeActiveChannelWithVerification(this)");
+		spanChannelName.setAttribute("status", element.joinStatus);
+		spanChannelName.setAttribute("id", element.name);
+		spanChannelName.innerHTML = element.name;
 
-		liChatGroup.appendChild(icon);
-		liChatGroup.appendChild(spanGroupName);
-		listOfChannels.appendChild(liChatGroup);
+		let badgeDot = document.createElement("span");
+		badgeDot.setAttribute("id", "badge" + element.id);
+		badgeDot.classList.add("badgeDot");
+		badgeDot.style.display = "none";
+
+		liChatChannel.appendChild(icon);
+		liChatChannel.appendChild(spanChannelName);
+		liChatChannel.appendChild(badgeDot);
+		listOfChannels.appendChild(liChatChannel);
 	}
 
 	updateNotJoined(element) {
-		let liChatGroup = document.createElement("li");
-		liChatGroup.classList.add("chatGroup");
-		liChatGroup.setAttribute("id", element.id);
-		liChatGroup.setAttribute("status", element.joinStatus);
+		let liChatChannel = document.createElement("li");
+		liChatChannel.classList.add("chatChannel");
+		liChatChannel.setAttribute("id", element.id);
+		liChatChannel.setAttribute("status", element.joinStatus);
 
 		let icon = document.createElement("i");
 		icon.classList.add("fas");
 		icon.classList.add("fa-plus");
 		icon.setAttribute("onclick", "connectionHandler.joinChannel(this)");
 
-		let spanGroupName = document.createElement("span");
-		spanGroupName.classList.add("groupName");
-		spanGroupName.setAttribute("onclick", "connectionHandler.changeActiveGroupWithVerification(this)");
-		spanGroupName.setAttribute("status", element.joinStatus);
-		spanGroupName.setAttribute("id", element.name);
-		spanGroupName.innerHTML = element.name;
+		let spanChannelName = document.createElement("span");
+		spanChannelName.classList.add("channelName");
+		// spanChannelName.setAttribute("onclick", "connectionHandler.changeActiveChannelWithVerification(this)");
+		spanChannelName.setAttribute("status", element.joinStatus);
+		spanChannelName.setAttribute("id", element.name);
+		spanChannelName.innerHTML = element.name;
 
-		liChatGroup.appendChild(icon);
-		liChatGroup.appendChild(spanGroupName);
-		listOfChannels.appendChild(liChatGroup);
+		let badgeDot = document.createElement("span");
+		badgeDot.setAttribute("id", "badge" + element.id);
+		badgeDot.classList.add("badgeDot");
+		badgeDot.style.display = "none";
+
+		liChatChannel.appendChild(icon);
+		liChatChannel.appendChild(spanChannelName);
+		liChatChannel.appendChild(badgeDot);
+		listOfChannels.appendChild(liChatChannel);
 	}
 
-	// sortChannels(idName) {
-	// 	var listOfChannels = $("#" + idName);
+	changeActiveChannelVue(thisEl) {
+		if (currentChannel) {
+			currentChannel.style.padding = null;
+			currentChannel.style.border = null;
+			currentChannel.style.borderRadius = null;
+		}
 
-	// 	listOfChannels
-	// 		.children()
-	// 		.detach()
-	// 		.sort(function(a, b) {
-	// 			return $(a)
-	// 				.text()
-	// 				.localeCompare($(b).text());
-	// 		})
-	// 		.appendTo(listOfChannels);
-	// }
+		activeChannel.innerHTML = thisEl.innerHTML;
+		currentChannel = thisEl;
+
+		inputToSend.focus();
+
+		thisEl.style.padding = "2px 5px";
+		thisEl.style.border = "1px solid rgb(13, 98, 255)";
+		thisEl.style.borderRadius = "20px";
+	}
 }

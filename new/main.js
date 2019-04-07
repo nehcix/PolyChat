@@ -64,10 +64,9 @@ function newConnection() {
 
 let userName;
 let sock;
-// userName = "sxc";
-// sock = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice?username=" + userName);
-// $("#currentUser").text(userName);
 newConnection();
+
+let audio = new Audio("get-outta-here.mp3");
 
 let logo = document.getElementById("logo");
 let user = document.getElementById("user");
@@ -79,16 +78,15 @@ let inputToSend = document.getElementById("inputToSend");
 let messages = document.getElementById("messages");
 let messagesWrapper = document.getElementById("messagesWrapper");
 let listOfChannels = document.getElementById("listOfChannels");
-let activeGroup = document.getElementById("actifGroup");
+let activeChannel = document.getElementById("actifChannel");
 let createChannel = document.getElementById("createChannel");
 
-let currentGroupId;
-let currentGroup;
+let currentChannel;
 
 let messagesVue = new MessagesVue();
 let channelsVue = new ChannelsVue();
 let messagesObserver = new MessagesObserver(messagesVue);
-let channelsObserver = new ChannelsObserver(channelsVue);
+let channelsObserver = new ChannelsObserver(messagesVue, channelsVue);
 let connectionHandler = new ConnectionHandler(messagesObserver, channelsObserver);
 
 sendButton.addEventListener("click", connectionHandler.sendInput);

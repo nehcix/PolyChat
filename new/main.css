@@ -20,9 +20,7 @@ span {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-button,
-i,
-[onclick] {
+button {
 	cursor: pointer;
 }
 
@@ -141,7 +139,7 @@ i,
 	margin: 10px 20px;
 	display: grid;
 	overflow: scroll;
-	overflow-x: hidden;
+	overflow-x: none;
 }
 
 #messages {
@@ -245,7 +243,7 @@ i,
 	padding: 20px;
 	height: 65vh;
 	overflow: scroll;
-	overflow-x: hidden;
+	overflow-x: none;
 }
 
 #listOfChannels > * {
@@ -257,11 +255,11 @@ i,
 	background-color: #eee;
 }
 
-.chatGroup > i {
+.chatChannel > i {
 	margin-right: 20px;
 }
 
-.chatGroup > span {
+.channelName {
 	color: rgb(39, 89, 180);
 }
 
@@ -285,4 +283,12 @@ ul {
 
 .fa-star {
 	font-size: 0.8em;
+}
+
+.badgeDot {
+	margin-left: 10px;
+	height: 10px;
+	width: 10px;
+	background-color: rgb(73, 137, 255);
+	border-radius: 50%;
 }

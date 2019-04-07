@@ -1,7 +1,8 @@
 "use strict";
 
 class ChannelsObserver {
-	constructor(channelsVue) {
+	constructor(messagesVue, channelsVue) {
+		this.messagesVue_ = messagesVue;
 		this.channelsVue_ = channelsVue;
 	}
 
@@ -10,11 +11,21 @@ class ChannelsObserver {
 			case "updateChannelsList":
 				this.channelsVue_.updateChannelsList(answerFromServer);
 				if (this.channelsVue_.isNew) {
-					this.changeActiveGroup();
+					this.changeActiveChannel($(".chatChannel")[0].children[1]);
 					this.channelsVue_.isNew = false;
 				} else {
-					this.changeActiveGroup(document.getElementById(currentGroup.innerHTML));
+					this.changeActiveChannel(document.getElementById(currentChannel.innerHTML));
 				}
+
+				$(".channelName").css("cursor", "pointer");
+				$(".channelName").click(event => {
+					if (event.target.attributes["status"].value == "false") {
+						alert("You need to join this channel first !\nVous devez d'abord rejoindre ce groupe !");
+					} else {
+						this.changeActiveChannel(event.target);
+					}
+				});
+
 				break;
 			case "onError":
 				alert(
@@ -26,24 +37,24 @@ class ChannelsObserver {
 		}
 	}
 
-	// default parameter is the first chat group (general)
-	changeActiveGroup(thisEl = $(".chatGroup")[0].children[1]) {
-		if (currentGroup) {
-			currentGroup.style.padding = null;
-			currentGroup.style.border = null;
-			currentGroup.style.borderRadius = null;
-		}
-
-		activeGroup.innerHTML = thisEl.innerHTML;
-		currentGroupId = thisEl.parentElement.id;
-		currentGroup = thisEl;
-		let message = new Message("onGetChannel", currentGroupId, null, userName, new Date());
-		sock.send(JSON.stringify(message));
+	changeActiveChannel(thisEl) {
 		messages.innerHTML = "";
-		inputToSend.focus();
+		this.channelsVue_.changeActiveChannelVue(thisEl);
+		if (this.messagesVue_.messagesPerChannel.has(thisEl.parentElement.id)) {
+			let oldMessages = this.messagesVue_.messagesPerChannel.get(thisEl.parentElement.id);
 
-		thisEl.style.padding = "2px 5px";
-		thisEl.style.border = "1px solid rgb(13, 98, 255)";
-		thisEl.style.borderRadius = "20px";
+			if (oldMessages.length <= 1) {
+				let message = new Message("onGetChannel", currentChannel.parentElement.id, null, userName, new Date());
+				sock.send(JSON.stringify(message));
+			}
+
+			for (let i = 0; i < oldMessages.length; i++) {
+				this.messagesVue_.onMessage(oldMessages[i], userName);
+			}
+		} else {
+			let message = new Message("onGetChannel", currentChannel.parentElement.id, null, userName, new Date());
+			sock.send(JSON.stringify(message));
+		}
+		this.messagesVue_.removeBadgesFrom(thisEl.parentElement.id);
 	}
 }

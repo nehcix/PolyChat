@@ -3,6 +3,8 @@
 class MessagesVue {
 	constructor() {
 		this.nbBadge = 0;
+		this.nbBadgePerChannel = new Map();
+		this.messagesPerChannel = new Map();
 	}
 
 	onMessage(answerFromServer, userName) {
@@ -115,16 +117,56 @@ class MessagesVue {
 		messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
 	}
 
-	badgePlusOne() {
+	// badgePlusOne() {
+	// 	if (this.nbBadge == 0) {
+	// 		this.nbBadge += 1;
+	// 		let badge = document.createElement("div");
+	// 		badge.setAttribute("id", "badge");
+	// 		badge.innerHTML = this.nbBadge;
+	// 		navBarSecondLine.appendChild(badge);
+	// 	} else {
+	// 		this.nbBadge += 1;
+	// 		$("#badge").text(this.nbBadge);
+	// 	}
+	// }
+
+	addNewBadge(channelId) {
+		document.getElementById("badge" + channelId).style.display = "inline-block";
+
 		if (this.nbBadge == 0) {
-			this.nbBadge += 1;
+			this.nbBadgePerChannel.set(channelId, 1);
+			this.nbBadge = 1;
+
 			let badge = document.createElement("div");
 			badge.setAttribute("id", "badge");
 			badge.innerHTML = this.nbBadge;
 			navBarSecondLine.appendChild(badge);
 		} else {
-			this.nbBadge += 1;
+			if (isNaN(this.nbBadgePerChannel.get(channelId))) {
+				this.nbBadgePerChannel.set(channelId, 1);
+				this.nbBadge += 1;
+			} else {
+				let thisNbBadge = this.nbBadgePerChannel.get(channelId);
+				this.nbBadgePerChannel.set(channelId, thisNbBadge + 1);
+				this.nbBadge += 1;
+			}
 			$("#badge").text(this.nbBadge);
+		}
+	}
+
+	removeBadgesFrom(channelId) {
+		document.getElementById("badge" + channelId).style.display = "none";
+
+		if (isNaN(this.nbBadgePerChannel.get(channelId))) {
+		} else {
+			this.nbBadge -= this.nbBadgePerChannel.get(channelId);
+			this.nbBadgePerChannel.set(channelId, 0);
+			$("#badge").text(this.nbBadge);
+		}
+		if (this.nbBadge == 0) {
+			if (navBarSecondLine.children[1]) {
+				navBarSecondLine.children[1].remove();
+			}
 		}
 	}
 }
