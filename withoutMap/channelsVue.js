@@ -31,10 +31,10 @@ class ChannelsVue {
 		let icon = document.createElement("i");
 		icon.classList.add("fas");
 		icon.classList.add("fa-star");
+		icon.style.color = "darkorange";
 
 		let spanChannelName = document.createElement("span");
 		spanChannelName.classList.add("channelName");
-		// spanChannelName.setAttribute("onclick", "connectionHandler.changeActiveChannelWithVerification(this)");
 		spanChannelName.setAttribute("status", element.joinStatus);
 		spanChannelName.setAttribute("id", element.name);
 		spanChannelName.innerHTML = element.name;
@@ -43,6 +43,7 @@ class ChannelsVue {
 		defaultTag.classList.add("toTranslate");
 		defaultTag.setAttribute("id", "defaultTag");
 		defaultTag.setAttribute("key", "Default");
+		defaultTag.innerHTML = "défaut";
 
 		let badgeDot = document.createElement("span");
 		badgeDot.setAttribute("id", "badge" + element.id);
@@ -64,13 +65,12 @@ class ChannelsVue {
 
 		let icon = document.createElement("i");
 		icon.classList.add("fas");
-
 		icon.classList.add("fa-minus");
-		icon.setAttribute("onclick", "connectionHandler.leaveChannel(this)");
+		icon.classList.add("toLeave");
+		icon.style.color = "darkorange";
 
 		let spanChannelName = document.createElement("span");
 		spanChannelName.classList.add("channelName");
-		// spanChannelName.setAttribute("onclick", "connectionHandler.changeActiveChannelWithVerification(this)");
 		spanChannelName.setAttribute("status", element.joinStatus);
 		spanChannelName.setAttribute("id", element.name);
 		spanChannelName.innerHTML = element.name;
@@ -95,11 +95,11 @@ class ChannelsVue {
 		let icon = document.createElement("i");
 		icon.classList.add("fas");
 		icon.classList.add("fa-plus");
-		icon.setAttribute("onclick", "connectionHandler.joinChannel(this)");
+		icon.classList.add("toJoin");
+		icon.style.color = "#5b898b";
 
 		let spanChannelName = document.createElement("span");
 		spanChannelName.classList.add("channelName");
-		// spanChannelName.setAttribute("onclick", "connectionHandler.changeActiveChannelWithVerification(this)");
 		spanChannelName.setAttribute("status", element.joinStatus);
 		spanChannelName.setAttribute("id", element.name);
 		spanChannelName.innerHTML = element.name;
@@ -127,8 +127,8 @@ class ChannelsVue {
 
 		inputToSend.focus();
 
-		thisEl.style.padding = "2px 5px";
-		thisEl.style.border = "1px solid rgb(13, 98, 255)";
+		thisEl.style.padding = "2px 10px";
+		thisEl.style.border = "1px solid rgb(39, 89, 180)";
 		thisEl.style.borderRadius = "20px";
 	}
 }

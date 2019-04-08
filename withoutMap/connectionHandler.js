@@ -6,16 +6,12 @@ class ConnectionHandler {
 		this.channelsObserver_ = channelsObserver;
 
 		this.lastAnswerFromServer;
-		sock.onmessage = event => {
-			this.lastAnswerFromServer = JSON.parse(event.data);
+	}
 
-			this.messagesObserver_.updateVue(this.lastAnswerFromServer);
-			this.channelsObserver_.updateVue(this.lastAnswerFromServer);
-
-			$(".toTranslate").each(function() {
-				$(this).text(languages[currentLanguage][$(this).attr("key")]);
-			});
-		};
+	newConnection() {
+		userName = prompt("Username (Nom d'utilisateur) : ");
+		sock = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice?username=" + userName);
+		$("#currentUser").text(userName);
 	}
 
 	sendInput() {
@@ -34,43 +30,39 @@ class ConnectionHandler {
 		sock.send(JSON.stringify(message));
 	}
 
-	// Since we can leave a channel which is not active... we need theses loops
 	joinChannel(event) {
-		let message = new Message("onJoinChannel", event.parentElement.id, null, userName, new Date());
+		let element = event.target;
+		let message = new Message("onJoinChannel", element.parentElement.id, null, userName, new Date());
 		sock.send(JSON.stringify(message));
 		alert(
 			"You (" +
 				userName +
 				") have joined " +
-				event.parentElement.children[1].innerHTML +
+				element.parentElement.children[1].innerHTML +
 				".\nVous (" +
 				userName +
 				") avez rejoint " +
-				event.parentElement.children[1].innerHTML +
+				element.parentElement.children[1].innerHTML +
 				"."
 		);
-		currentChannel = event.parentElement.children[1];
-
-		message = new Message("onGetChannel", currentChannel.parentElement.id, null, userName, new Date());
-		sock.send(JSON.stringify(message));
 	}
 
 	leaveChannel(event) {
-		let message = new Message("onLeaveChannel", event.parentElement.id, null, userName, new Date());
+		let element = event.target;
+		let message = new Message("onLeaveChannel", element.parentElement.id, null, userName, new Date());
 		sock.send(JSON.stringify(message));
 		alert(
 			"You (" +
 				userName +
 				") have leaved " +
-				event.parentElement.children[1].innerHTML +
+				element.parentElement.children[1].innerHTML +
 				".\nVous (" +
 				userName +
 				") avez quitté " +
-				event.parentElement.children[1].innerHTML +
+				element.parentElement.children[1].innerHTML +
 				"."
 		);
 		currentChannel = $(".chatChannel")[0].children[1];
-		this.channelsObserver_.messagesVue_.messagesPerChannel.delete(event.parentElement.id);
 	}
 
 	createChannel() {

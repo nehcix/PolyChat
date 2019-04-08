@@ -4,7 +4,6 @@ class MessagesVue {
 	constructor() {
 		this.nbBadge = 0;
 		this.nbBadgePerChannel = new Map();
-		this.messagesPerChannel = new Map();
 	}
 
 	onMessage(answerFromServer, userName) {
@@ -116,19 +115,6 @@ class MessagesVue {
 		inputToSend.value = "";
 		messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
 	}
-
-	// badgePlusOne() {
-	// 	if (this.nbBadge == 0) {
-	// 		this.nbBadge += 1;
-	// 		let badge = document.createElement("div");
-	// 		badge.setAttribute("id", "badge");
-	// 		badge.innerHTML = this.nbBadge;
-	// 		navBarSecondLine.appendChild(badge);
-	// 	} else {
-	// 		this.nbBadge += 1;
-	// 		$("#badge").text(this.nbBadge);
-	// 	}
-	// }
 
 	addNewBadge(channelId) {
 		document.getElementById("badge" + channelId).style.display = "inline-block";

@@ -20,8 +20,14 @@ span {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-button {
+button,
+i {
 	cursor: pointer;
+}
+
+#createChannel,
+#channelSettings > i {
+	color: white;
 }
 
 #navBar {
@@ -47,7 +53,7 @@ button {
 }
 #Chat {
 	cursor: pointer;
-	color: dodgerblue;
+	color: #3585f7;
 }
 
 #navBarButtons {
@@ -77,7 +83,7 @@ button {
 }
 #currentUser {
 	font-size: 0.8em;
-	color: green;
+	color: #5b898b;
 }
 #badge {
 	position: relative;
@@ -132,6 +138,7 @@ button {
 
 #messengerZone {
 	border-right: 1px solid #ddd;
+	overflow-x: none;
 }
 
 #messagesWrapper {
@@ -184,7 +191,7 @@ button {
 	border-radius: 20px;
 	padding: 0px 15px;
 	padding-bottom: 10px;
-	width: 250px;
+	max-width: 250px;
 	color: #999;
 	word-break: normal;
 	display: grid;
@@ -196,10 +203,9 @@ button {
 	border-radius: 20px;
 	padding: 10px 15px;
 	background-color: #ddd;
-	width: 250px;
-	/* display: grid; */
-	/* overflow-wrap: break-word; */
+	max-width: 250px;
 	word-break: normal;
+	display: inline-block;
 }
 
 .messageSend {
@@ -213,8 +219,8 @@ button {
 	min-height: 18px;
 	border-radius: 20px;
 	padding: 10px 15px;
-	background-color: rgb(13, 98, 255);
-	width: 250px;
+	background-color: #3585f7;
+	max-width: 250px;
 	color: white;
 	word-break: normal;
 	display: grid;
@@ -231,6 +237,11 @@ button {
 	font-size: 1em;
 	margin: 0 2px;
 	padding: 10px 2px;
+}
+
+textarea {
+	resize: none;
+	height: 20px;
 }
 
 #inputBox > button {
@@ -267,10 +278,10 @@ button {
 	font-size: 0.8em;
 	margin-left: 10px;
 	padding: 1px 7px;
-	border: 1px solid rgb(73, 137, 255);
+	border: 1px solid rgb(39, 89, 180);
 	border-radius: 20px;
 	font-style: italic;
-	color: rgb(73, 137, 255);
+	color: rgb(39, 89, 180);
 }
 
 #translateButton {
@@ -289,6 +300,6 @@ ul {
 	margin-left: 10px;
 	height: 10px;
 	width: 10px;
-	background-color: rgb(73, 137, 255);
+	background-color: red;
 	border-radius: 50%;
 }
