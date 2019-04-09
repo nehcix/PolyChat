@@ -1,8 +1,7 @@
 "use strict";
 
 class ChannelsObserver {
-	constructor(messagesVue, channelsVue) {
-		this.messagesVue_ = messagesVue;
+	constructor(channelsVue) {
 		this.channelsVue_ = channelsVue;
 	}
 
@@ -17,8 +16,6 @@ class ChannelsObserver {
 				}
 
 				this.changeActiveChannel(document.getElementById(currentChannel.innerHTML));
-
-				controller.updateControl();
 
 				break;
 			case "onError":
@@ -38,6 +35,6 @@ class ChannelsObserver {
 		let message = new Message("onGetChannel", currentChannel.parentElement.id, null, userName, new Date());
 		sock.send(JSON.stringify(message));
 
-		this.messagesVue_.removeBadgesFrom(thisEl.parentElement.id);
+		messagesVue.removeBadgesFrom(thisEl.parentElement.id);
 	}
 }

@@ -1,9 +1,9 @@
 "use strict";
 
 class ConnectionHandler {
-	constructor(messagesObserver, channelsObserver) {
+	constructor(messagesObserver, channelsObserver_) {
 		this.messagesObserver_ = messagesObserver;
-		this.channelsObserver_ = channelsObserver;
+		this.channelsObserver_ = channelsObserver_;
 
 		this.lastAnswerFromServer;
 	}
@@ -12,6 +12,20 @@ class ConnectionHandler {
 		userName = prompt("Username (Nom d'utilisateur) : ");
 		sock = new WebSocket("ws://log2420-nginx.info.polymtl.ca/chatservice?username=" + userName);
 		$("#currentUser").text(userName);
+
+		sock.onmessage = event => {
+			this.lastAnswerFromServer = JSON.parse(event.data);
+
+			this.messagesObserver_.updateVue(this.lastAnswerFromServer);
+			this.channelsObserver_.updateVue(this.lastAnswerFromServer);
+
+			// need to wait until Dom get updated before selecting .toTranslate
+			Promise.resolve().then(() => {
+				$(".toTranslate").each(function() {
+					$(this).text(languages[currentLanguage][$(this).attr("key")]);
+				});
+			});
+		};
 	}
 
 	sendInput() {
@@ -45,6 +59,14 @@ class ConnectionHandler {
 				element.parentElement.children[1].innerHTML +
 				"."
 		);
+	}
+
+	verificationBeforeChange(event) {
+		if (event.target.attributes["status"].value == "false") {
+			alert("You need to join this channel first !\nVous devez d'abord rejoindre ce groupe !");
+		} else {
+			this.channelsObserver_.changeActiveChannel(event.target);
+		}
 	}
 
 	leaveChannel(event) {

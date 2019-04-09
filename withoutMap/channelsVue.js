@@ -21,6 +21,8 @@ class ChannelsVue {
 				this.updateNotJoined(answerFromServer.data[i]);
 			}
 		}
+
+		controller.updateControl();
 	}
 
 	updateGeneral(element) {

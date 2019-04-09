@@ -16,18 +16,17 @@ class MessagesObserver {
 
 				if (answerFromServer.sender != userName && answerFromServer.sender != "Admin") {
 					var playPromise = audio.play();
-					if (playPromise !== undefined) {
-						playPromise
-							.then(() => {
-								// audio.play();
-							})
-							.catch(error => {
-								console.log(
-									"I don't know why but sometimes audio.play() doesn't work, please try again latter..."
-								);
-								console.log(error);
-							});
-					}
+
+					playPromise
+						.then(() => {
+							// audio.play();
+						})
+						.catch(error => {
+							console.log(
+								"I don't know why but sometimes audio.play() doesn't work, please try again latter..."
+							);
+							console.log(error);
+						});
 				}
 
 				break;

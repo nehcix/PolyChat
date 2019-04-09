@@ -41,21 +41,21 @@ class Controller {
 	}
 
 	setControl() {
-		sendButton.addEventListener("click", this.connectionHandler_.sendInput);
+		sendButton.addEventListener("click", connectionHandler.sendInput);
 		inputToSend.addEventListener("keypress", function(e) {
 			if (e.key === "Enter") {
-				this.connectionHandler_.sendInput();
+				connectionHandler.sendInput();
 			}
 		});
-		thumbsUp.addEventListener("click", this.connectionHandler_.sendThumbsUp);
+		thumbsUp.addEventListener("click", connectionHandler.sendThumbsUp);
 
-		createChannel.addEventListener("click", this.connectionHandler_.createChannel);
+		createChannel.addEventListener("click", connectionHandler.createChannel);
 
-		user.addEventListener("click", this.connectionHandler_.newConnection);
+		user.addEventListener("click", connectionHandler.newConnection);
 
 		$("#logo")
 			.children()
-			.click(this.connectionHandler_.newConnection);
+			.click(connectionHandler.newConnection);
 
 		//languages setup
 		$("#translateButton").text("fr");
@@ -72,31 +72,11 @@ class Controller {
 				$(this).text(languages[currentLanguage][$(this).attr("key")]);
 			});
 		});
-
-		sock.onmessage = event => {
-			this.connectionHandler_.lastAnswerFromServer = JSON.parse(event.data);
-
-			this.connectionHandler_.messagesObserver_.updateVue(this.connectionHandler_.lastAnswerFromServer);
-			this.connectionHandler_.channelsObserver_.updateVue(this.connectionHandler_.lastAnswerFromServer);
-		};
 	}
 
 	updateControl() {
-		setTimeout(() => {
-			$(".toTranslate").each(function() {
-				$(this).text(languages[currentLanguage][$(this).attr("key")]);
-			});
-		}, 100);
-
 		$(".channelName").css("cursor", "pointer");
-		$(".channelName").bind("click", event => {
-			if (event.target.attributes["status"].value == "false") {
-				alert("You need to join this channel first !\nVous devez d'abord rejoindre ce groupe !");
-			} else {
-				channelsObserver.changeActiveChannel(event.target);
-			}
-		});
-
+		$(".channelName").bind("click", connectionHandler.verificationBeforeChange.bind(connectionHandler));
 		$(".toLeave").bind("click", connectionHandler.leaveChannel);
 		$(".toJoin").bind("click", connectionHandler.joinChannel);
 	}
@@ -126,7 +106,7 @@ let sock;
 let messagesVue = new MessagesVue();
 let channelsVue = new ChannelsVue();
 let messagesObserver = new MessagesObserver(messagesVue);
-let channelsObserver = new ChannelsObserver(messagesVue, channelsVue);
+let channelsObserver = new ChannelsObserver(channelsVue);
 let connectionHandler = new ConnectionHandler(messagesObserver, channelsObserver);
 let controller = new Controller(connectionHandler);
 
