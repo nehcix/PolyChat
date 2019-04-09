@@ -28,6 +28,9 @@ class MessagesObserver {
 							console.log(error);
 						});
 				}
+				if (answerFromServer.sender == userName) {
+					inputToSend.value = "";
+				}
 
 				break;
 			case "onGetChannel":

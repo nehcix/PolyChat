@@ -112,7 +112,6 @@ class MessagesVue {
 			messages.appendChild(divMssageReceived);
 		}
 
-		inputToSend.value = "";
 		messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
 	}
 

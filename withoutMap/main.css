@@ -136,17 +136,19 @@ i {
 	font-size: 1.2em;
 }
 
+#actifChannel {
+	font-weight: bold;
+}
+
 #messengerZone {
 	border-right: 1px solid #ddd;
-	overflow-x: none;
 }
 
 #messagesWrapper {
 	height: 65vh;
 	margin: 10px 20px;
 	display: grid;
-	overflow: scroll;
-	overflow-x: none;
+	overflow-y: scroll;
 }
 
 #messages {
@@ -254,8 +256,7 @@ textarea {
 #listOfChannels {
 	padding: 20px;
 	height: 65vh;
-	overflow: scroll;
-	overflow-x: none;
+	overflow-y: scroll;
 }
 
 #listOfChannels > * {
