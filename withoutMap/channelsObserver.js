@@ -1,18 +1,18 @@
 "use strict";
 
 class ChannelsObserver {
-	constructor(channelsVue) {
-		this.channelsVue_ = channelsVue;
+	constructor(channelsView) {
+		this.channelsView_ = channelsView;
 	}
 
-	updateVue(answerFromServer) {
+	updateView(answerFromServer) {
 		switch (answerFromServer.eventType) {
 			case "updateChannelsList":
-				this.channelsVue_.updateChannelsList(answerFromServer);
+				this.channelsView_.updateChannelsList(answerFromServer);
 
-				if (this.channelsVue_.isNew) {
+				if (this.channelsView_.isNew) {
 					currentChannel = $(".chatChannel")[0].children[1];
-					this.channelsVue_.isNew = false;
+					this.channelsView_.isNew = false;
 				}
 
 				this.changeActiveChannel(document.getElementById(currentChannel.innerHTML));
@@ -30,11 +30,11 @@ class ChannelsObserver {
 
 	changeActiveChannel(thisEl) {
 		messages.innerHTML = "";
-		this.channelsVue_.changeActiveChannelVue(thisEl);
+		this.channelsView_.changeActiveChannelView(thisEl);
 
 		let message = new Message("onGetChannel", currentChannel.parentElement.id, null, userName, new Date());
 		sock.send(JSON.stringify(message));
 
-		messagesVue.removeBadgesFrom(thisEl.parentElement.id);
+		messagesView.removeBadgesFrom(thisEl.parentElement.id);
 	}
 }

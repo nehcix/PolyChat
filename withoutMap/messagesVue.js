@@ -1,6 +1,6 @@
 "use strict";
 
-class MessagesVue {
+class MessagesView {
 	constructor() {
 		this.nbBadge = 0;
 		this.nbBadgePerChannel = new Map();

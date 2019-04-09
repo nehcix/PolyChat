@@ -16,8 +16,8 @@ class ConnectionHandler {
 		sock.onmessage = event => {
 			this.lastAnswerFromServer = JSON.parse(event.data);
 
-			this.messagesObserver_.updateVue(this.lastAnswerFromServer);
-			this.channelsObserver_.updateVue(this.lastAnswerFromServer);
+			this.messagesObserver_.updateView(this.lastAnswerFromServer);
+			this.channelsObserver_.updateView(this.lastAnswerFromServer);
 
 			// need to wait until Dom get updated before selecting .toTranslate
 			Promise.resolve().then(() => {

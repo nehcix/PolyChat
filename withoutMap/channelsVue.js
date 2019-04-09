@@ -1,6 +1,6 @@
 "use strict";
 
-class ChannelsVue {
+class ChannelsView {
 	constructor() {
 		this.isNew = true;
 	}
@@ -22,7 +22,7 @@ class ChannelsVue {
 			}
 		}
 
-		controller.updateControl();
+		controller.updateControl.call(controller);
 	}
 
 	updateGeneral(element) {
@@ -117,7 +117,7 @@ class ChannelsVue {
 		listOfChannels.appendChild(liChatChannel);
 	}
 
-	changeActiveChannelVue(thisEl) {
+	changeActiveChannelView(thisEl) {
 		if (currentChannel) {
 			currentChannel.style.padding = null;
 			currentChannel.style.border = null;
