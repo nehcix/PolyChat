@@ -59,7 +59,7 @@ class Controller {
 
 		//languages setup
 		$("#translateButton").text("fr");
-		$("#translateButton").click(function() {
+		$("#translateButton").click(() => {
 			if (currentLanguage == "en") {
 				currentLanguage = "fr";
 				$("#translateButton").text("en");
@@ -72,6 +72,44 @@ class Controller {
 				$(this).text(languages[currentLanguage][$(this).attr("key")]);
 			});
 		});
+
+		let icon = document.createElement("i");
+		icon.classList.add("fas");
+		icon.classList.add("fa-volume-up");
+		$("#soundControl").text("Volume : ");
+		$("#soundControl").append(icon);
+
+		// toggle between hiding and showing the dropdown content
+		$("#globaleSettings").click(() => {
+			let myDropdown = document.getElementById("myDropdown");
+			myDropdown.classList.toggle("show");
+		});
+
+		$("#soundControl").click(() => {
+			audioIsON = !audioIsON;
+			if (audioIsON) {
+				let icon = document.createElement("i");
+				icon.classList.add("fas");
+				icon.classList.add("fa-volume-up");
+				$("#soundControl").empty();
+				$("#soundControl").text("Volume : ");
+				$("#soundControl").append(icon);
+			} else {
+				let icon = document.createElement("i");
+				icon.classList.add("fas");
+				icon.classList.add("fa-volume-mute");
+				$("#soundControl").empty();
+				$("#soundControl").text("Volume : ");
+				$("#soundControl").append(icon);
+			}
+		});
+
+		// Close the dropdown menu if the user clicks outside of it
+		window.onclick = event => {
+			if (event.target.parentElement != null && !event.target.parentElement.matches("#globaleSettings")) {
+				myDropdown.classList.remove("show");
+			}
+		};
 	}
 
 	updateControl() {
@@ -95,6 +133,7 @@ let listOfChannels = document.getElementById("listOfChannels");
 let activeChannel = document.getElementById("actifChannel");
 let createChannel = document.getElementById("createChannel");
 
+let audioIsON = true;
 let audio = new Audio("get-outta-here.mp3");
 
 let currentChannel;
