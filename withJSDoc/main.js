@@ -70,7 +70,7 @@ class Controller {
 	 */
 	setControl() {
 		sendButton.addEventListener("click", this.connectionHandler_.sendInput);
-		inputToSend.addEventListener("keypress", function(e) {
+		inputToSend.addEventListener("keypress", e => {
 			if (e.key === "Enter") {
 				this.connectionHandler_.sendInput();
 			}

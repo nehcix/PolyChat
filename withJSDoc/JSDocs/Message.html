@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Channel</title>
+    <title>JSDoc: Class: Message</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Channel</h1>
+    <h1 class="page-title">Class: Message</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Channel<span class="signature">(id, name, status, messages, numberOfUsers)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Message<span class="signature">(eventType, channelId, data, sender, timestamp)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="Channel"><span class="type-signature"></span>new Channel<span class="signature">(id, name, status, messages, numberOfUsers)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Message"><span class="type-signature"></span>new Message<span class="signature">(eventType, channelId, data, sender, timestamp)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Channel, Represents a data transfert object, channel.
+    Message, Represents a message DTO (data transfert object).
 </div>
 
 
@@ -85,7 +85,7 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>eventType</code></td>
             
 
             <td class="type">
@@ -101,14 +101,14 @@
 
             
 
-            <td class="description last">The unique id of the channel.</td>
+            <td class="description last">The event type of the message.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>name</code></td>
+                <td class="name"><code>channelId</code></td>
             
 
             <td class="type">
@@ -124,20 +124,20 @@
 
             
 
-            <td class="description last">The name of the channel.</td>
+            <td class="description last">The channel id.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>status</code></td>
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type">AnyObject</span>
 
 
             
@@ -147,21 +147,20 @@
 
             
 
-            <td class="description last">Since we are sending this DTO to the clients, it will help us to not send too more data
- True, if the end user joined this channel / False if not.</td>
+            <td class="description last">The content of the message.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>messages</code></td>
+                <td class="name"><code>sender</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">string</span>
 
 
             
@@ -171,20 +170,20 @@
 
             
 
-            <td class="description last">The list the of the messages in the channel.</td>
+            <td class="description last">The sender name.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>numberOfUsers</code></td>
+                <td class="name"><code>timestamp</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Date</span>
 
 
             
@@ -194,7 +193,7 @@
 
             
 
-            <td class="description last">Count the users in the channel.</td>
+            <td class="description last">The timestamp of the message.</td>
         </tr>
 
     
@@ -248,7 +247,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="channel.js.html">channel.js</a>, <a href="channel.js.html#line7">line 7</a>
+        <a href="message.js.html">message.js</a>, <a href="message.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -308,13 +307,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Channel.html">Channel</a></li><li><a href="ChannelsObserver.html">ChannelsObserver</a></li><li><a href="ConnectionHandler.html">ConnectionHandler</a></li><li><a href="Controller.html">Controller</a></li><li><a href="Message.html">Message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#audio">audio</a></li><li><a href="global.html#channelsObserver">channelsObserver</a></li><li><a href="global.html#channelsView">channelsView</a></li><li><a href="global.html#connectionHandler">connectionHandler</a></li><li><a href="global.html#controller">controller</a></li><li><a href="global.html#currentChannel">currentChannel</a></li><li><a href="global.html#Days">Days</a></li><li><a href="global.html#languages">languages</a></li><li><a href="global.html#messagesObserver">messagesObserver</a></li><li><a href="global.html#messagesView">messagesView</a></li><li><a href="global.html#sock">sock</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Channel.html">Channel</a></li><li><a href="ChannelsObserver.html">ChannelsObserver</a></li><li><a href="ChannelsView.html">ChannelsView</a></li><li><a href="ConnectionHandler.html">ConnectionHandler</a></li><li><a href="Controller.html">Controller</a></li><li><a href="Message.html">Message</a></li><li><a href="MessagesObserver.html">MessagesObserver</a></li><li><a href="MessagesView.html">MessagesView</a></li></ul><h3>Global</h3><ul><li><a href="global.html#audio">audio</a></li><li><a href="global.html#channelsObserver">channelsObserver</a></li><li><a href="global.html#channelsView">channelsView</a></li><li><a href="global.html#connectionHandler">connectionHandler</a></li><li><a href="global.html#controller">controller</a></li><li><a href="global.html#currentChannel">currentChannel</a></li><li><a href="global.html#Days">Days</a></li><li><a href="global.html#languages">languages</a></li><li><a href="global.html#messagesObserver">messagesObserver</a></li><li><a href="global.html#messagesView">messagesView</a></li><li><a href="global.html#sock">sock</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Apr 09 2019 19:51:06 GMT-0400 (GMT-04:00)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Apr 09 2019 22:05:17 GMT-0400 (GMT-04:00)
 </footer>
 
 <script> prettyPrint(); </script>
