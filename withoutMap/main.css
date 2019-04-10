@@ -98,6 +98,7 @@ i {
 	display: grid;
 	justify-content: center;
 	align-content: center;
+	visibility: hidden;
 }
 
 #chatSection {

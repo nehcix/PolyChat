@@ -1,10 +1,24 @@
 "use strict";
 
+/**
+ * @description ChannelsView represents the view of the channels, it updates the channel List and it changes the Active Channel View.
+ * @author Xi Chen Shen
+ * @author Hakim Payman
+ * @copyright Ecole Polytechnique de Montreal & Course LOG2420
+ * @version 1.0.0
+ */
 class ChannelsView {
+	/**
+	 * This constructor sets the isNew to true, it means that this channelView is new and have never update the channels list
+	 */
 	constructor() {
 		this.isNew = true;
 	}
 
+	/**
+	 *	First, it will remove all channels from the list. Then, it will add channels in which the current user has joined. Then, it will add channels in which the current user hasn't yet joined. Finally, it will call updateControl un the controller to update the control of the controller (because the Dom is modified).
+	 * @param {object} answerFromServer The answerFromServer holds the answer from the server which got parsed in connectionHandler.
+	 */
 	updateChannelsList(answerFromServer) {
 		while (listOfChannels.firstChild) {
 			listOfChannels.removeChild(listOfChannels.firstChild);
@@ -25,6 +39,10 @@ class ChannelsView {
 		controller.updateControl.call(controller);
 	}
 
+	/**
+	 * This method will append a new channel (general channel) to the channel list depending on the data in parameter "element".
+	 * @param {object} element This variable represents a single channel from the answerFromServer.data.
+	 */
 	updateGeneral(element) {
 		let liChatChannel = document.createElement("li");
 		liChatChannel.classList.add("chatChannel");
@@ -59,6 +77,10 @@ class ChannelsView {
 		listOfChannels.appendChild(liChatChannel);
 	}
 
+	/**
+	 * This method will append a new channel (joined channels) to the channel list depending on the data in parameter "element".
+	 * @param {object} element This variable represents a single channel from the answerFromServer.data.
+	 */
 	updateJoined(element) {
 		let liChatChannel = document.createElement("li");
 		liChatChannel.classList.add("chatChannel");
@@ -88,6 +110,10 @@ class ChannelsView {
 		listOfChannels.appendChild(liChatChannel);
 	}
 
+	/**
+	 * This method will append a new channel (not joined channels) to the channel list depending on the data in parameter "element".
+	 * @param {object} element This variable represents a single channel from the answerFromServer.data.
+	 */
 	updateNotJoined(element) {
 		let liChatChannel = document.createElement("li");
 		liChatChannel.classList.add("chatChannel");
@@ -117,6 +143,10 @@ class ChannelsView {
 		listOfChannels.appendChild(liChatChannel);
 	}
 
+	/**
+	 * This method will channel the style of the (next) current channel (adds a border in blue) representing by thisEl.
+	 * @param {object} thisEl
+	 */
 	changeActiveChannelView(thisEl) {
 		if (currentChannel) {
 			currentChannel.style.padding = null;

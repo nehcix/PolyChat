@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Controller</title>
+    <title>JSDoc: Class: ChannelsObserver</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Controller</h1>
+    <h1 class="page-title">Class: ChannelsObserver</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Controller<span class="signature">(connectionHandler)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>ChannelsObserver<span class="signature">(channelsView)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="Controller"><span class="type-signature"></span>new Controller<span class="signature">(connectionHandler)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ChannelsObserver"><span class="type-signature"></span>new ChannelsObserver<span class="signature">(channelsView)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    This objet is in the main scope, so by default it has asses to all variables declared in main.js, it contains the connectionHandler which contains channels ans messages observer.
+    ChannelsObserver is the sub-model of the globale model(connectionHandler), it contains the channelsView. Once this get poked by the the globale model, it will update the channel view.
 </div>
 
 
@@ -85,7 +85,7 @@
 
         <tr>
             
-                <td class="name"><code>connectionHandler</code></td>
+                <td class="name"><code>channelsView</code></td>
             
 
             <td class="type">
@@ -101,7 +101,7 @@
 
             
 
-            <td class="description last">The controller will update this global model in which contains two sub-models.</td>
+            <td class="description last">Objet view for channels.</td>
         </tr>
 
     
@@ -157,7 +157,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line59">line 59</a>
+        <a href="channelsObserver.js.html">channelsObserver.js</a>, <a href="channelsObserver.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -211,7 +211,7 @@
     
 
     
-    <h4 class="name" id="setControl"><span class="type-signature"></span>setControl<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="changeActiveChannel"><span class="type-signature"></span>changeActiveChannel<span class="signature">(thisEl)</span><span class="type-signature"></span></h4>
     
 
     
@@ -219,8 +219,10 @@
 
 
 <div class="description">
-    SetControl will add EventListener to Dom elements,
-This method will be call on the current objet(Controller), and will be execute only once in end of main.js to setup everything.
+    This method will be used to activate another channel (or update the current channel).
+It will first empty all the messages in screen, and tell the channelView to change the active channel view (changeActiveChannelView).
+Then it will send a message of type onGetChannel by using the current channel id, the user input in the textarea, the username and the current time.
+Finally it will remove the badges of unread messages depending on which channel is activated.
 </div>
 
 
@@ -229,6 +231,55 @@ This method will be call on the current objet(Controller), and will be execute o
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>thisEl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">objet</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">This holds the span (.channelName) of the channel we want to activate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -264,7 +315,7 @@ This method will be call on the current objet(Controller), and will be execute o
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line71">line 71</a>
+        <a href="channelsObserver.js.html">channelsObserver.js</a>, <a href="channelsObserver.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -298,7 +349,7 @@ This method will be call on the current objet(Controller), and will be execute o
     
 
     
-    <h4 class="name" id="updateControl"><span class="type-signature"></span>updateControl<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="updateView"><span class="type-signature"></span>updateView<span class="signature">(answerFromServer)</span><span class="type-signature"></span></h4>
     
 
     
@@ -306,8 +357,7 @@ This method will be call on the current objet(Controller), and will be execute o
 
 
 <div class="description">
-    This method will be execute everytime we update the Dom,
-since the Dom is changed, it may loses some EventListeners and css propoties that have been setup by setControl at the beginning.
+    This method contains a switch case. Depending on the type of answer from the server, this method will update the view differently (see details in code).
 </div>
 
 
@@ -316,6 +366,55 @@ since the Dom is changed, it may loses some EventListeners and css propoties tha
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>answerFromServer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The answerFromServer holds the answer from the server which got parsed in connectionHandler</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -351,7 +450,7 @@ since the Dom is changed, it may loses some EventListeners and css propoties tha
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="main.js.html">main.js</a>, <a href="main.js.html#line165">line 165</a>
+        <a href="channelsObserver.js.html">channelsObserver.js</a>, <a href="channelsObserver.js.html#line23">line 23</a>
     </li></ul></dd>
     
 

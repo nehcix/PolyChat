@@ -1,13 +1,21 @@
+/**
+ * @description main.js contains the declaration of the class Controller and all the variables will be used later in MVC.
+ * @author Xi Chen Shen
+ * @author Hakim Payman
+ * @copyright Ecole Polytechnique de Montreal & Course LOG2420
+ * @version 1.0.0
+ */
+
 "use strict";
 
 // ******************************DataBase***********************************
 /**
- * Translate numbers to Days(string)
+ * An array to translate numbers to Days(string).
  */
 let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 /**
- * This object will be used for multi languages translation
+ * This object will be used for multi languages translation.
  */
 let languages = {
 	en: {
@@ -42,17 +50,15 @@ let languages = {
 // ******************************DataBase***********************************
 
 /**
- * @description main.js contains the declaration of the class Controller and all the variables will be used later in MVC
+ * @description This objet is in the main scope, so by default it has asses to all variables declared in main.js, it contains the connectionHandler which contains channels ans messages observer.
  * @author Xi Chen Shen
- * @author Hakim Sakhawat Payman
+ * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
  * @version 1.0.0
  */
 class Controller {
 	/**
-	 * Controller knows the connectionHandler which contains channels ans messages observer,
-	 * this objet is in the main scope, so by default it has asses to all variables declared in main
-	 * @param {object} connectionHandler
+	 * @param {object} connectionHandler The controller will update this global model in which contains two sub-models.
 	 */
 	constructor(connectionHandler) {
 		this.connectionHandler_ = connectionHandler;
@@ -60,7 +66,7 @@ class Controller {
 
 	/**
 	 * SetControl will add EventListener to Dom elements,
-	 * This method will be call on the current objet(Controller), and will be execute only once in end of main.js to setup everything
+	 * This method will be call on the current objet(Controller), and will be execute only once in end of main.js to setup everything.
 	 */
 	setControl() {
 		sendButton.addEventListener("click", this.connectionHandler_.sendInput);
@@ -76,20 +82,20 @@ class Controller {
 		user.addEventListener("click", this.connectionHandler_.newConnection);
 
 		/**
-		 * A click on anyparts of logo will call the newConnection function
+		 * A click on anyparts of logo will call the newConnection function.
 		 */
 		$("#logo")
 			.children()
 			.click(this.connectionHandler_.newConnection);
 
 		/**
-		 * the language is french by default
+		 * The language is setted to french by default.
 		 */
 		$("#translateButton").text("fr");
 
 		/**
 		 * Once the translateButton is clicked, it's text will be changed (en->fr or fr->en) depending the current language,
-		 * then every element of class .toTranslate will be translate by changing its text(innerHTML) to the corresponding element in languages objet declared in line 12 of main.js
+		 * then every element of class .toTranslate will be translate by changing its text(innerHTML) to the corresponding element in languages objet declared in line 12 of main.js.
 		 */
 		$("#translateButton").click(() => {
 			if (currentLanguage == "en") {
@@ -106,7 +112,7 @@ class Controller {
 		});
 
 		/**
-		 * Add the dropdown list element (Volume : icon) of default (volume on)
+		 * Adds the dropdown list element (Volume : icon) of default (volume on).
 		 */
 		let icon = document.createElement("i");
 		icon.classList.add("fas");
@@ -115,7 +121,7 @@ class Controller {
 		$("#soundControl").append(icon);
 
 		/**
-		 * Toggle between hiding and showing the dropdown list element
+		 * Toggles between hiding and showing the dropdown list element.
 		 */
 		$("#globaleSettings").click(() => {
 			let myDropdown = document.getElementById("myDropdown");
@@ -123,7 +129,7 @@ class Controller {
 		});
 
 		/**
-		 * Toggle between the mute icon and volume-up icon depending the if the volume is on
+		 * Toggles between the mute icon and volume-up icon depending the if the volume is on.
 		 */
 		$("#soundControl").click(() => {
 			audioIsON = !audioIsON;
@@ -144,7 +150,7 @@ class Controller {
 			}
 		});
 
-		/** Close the dropdown menu if the user clicks outside of the icon */
+		/** Closes the dropdown menu if the user clicks outside of the icon. */
 		window.onclick = event => {
 			if (event.target.parentElement != null && !event.target.parentElement.matches("#globaleSettings")) {
 				myDropdown.classList.remove("show");
@@ -154,7 +160,7 @@ class Controller {
 
 	/**
 	 * This method will be execute everytime we update the Dom,
-	 * since the Dom is changed, it may loses some EventListeners and css propoties that have been setup by setControl at the beginning
+	 * since the Dom is changed, it may loses some EventListeners and css propoties that have been setup by setControl at the beginning.
 	 */
 	updateControl() {
 		$(".channelName").css("cursor", "pointer");
@@ -164,7 +170,7 @@ class Controller {
 	}
 }
 
-// Variables that will be used by MVC
+// Variables that will be used by MVC.
 let logo = document.getElementById("logo");
 let user = document.getElementById("user");
 let bell = document.getElementById("bell");
@@ -180,50 +186,50 @@ let createChannel = document.getElementById("createChannel");
 
 let audioIsON = true;
 /**
- * The notification sound
+ * The notification sound.
  */
 let audio = new Audio("get-outta-here.mp3");
 
 /**
- * This variable holds the span (.channelName) of the current channel
+ * This variable holds the span (.channelName) of the current channel.
  */
 let currentChannel;
 let currentLanguage = "fr";
 
-let userName;
+let username;
 
 /**
- * This variable holds the WebSocket created by newConnection()
+ * This variable holds the WebSocket created by newConnection().
  */
 let sock;
 
 /**
- * Objet view for messages
+ * Objet view for messages.
  */
 let messagesView = new MessagesView();
 
 /**
- * Objet view for channels
+ * Objet view for channels.
  */
 let channelsView = new ChannelsView();
 
 /**
- * Objet model for messages which will update messagesView
+ * Objet model for messages which will update messagesView.
  */
 let messagesObserver = new MessagesObserver(messagesView);
 
 /**
- * Objet model for channels which will update messagesView
+ * Objet model for channels which will update messagesView.
  */
 let channelsObserver = new ChannelsObserver(channelsView);
 
 /**
- * Objet global model which will tell messagesObserver and channelsObserver to update itself
+ * Objet global model which will tell messagesObserver and channelsObserver to update itself.
  */
 let connectionHandler = new ConnectionHandler(messagesObserver, channelsObserver);
 
 /**
- * Objet ontroller to update models
+ * Objet ontroller to update models.
  */
 let controller = new Controller(connectionHandler);
 
