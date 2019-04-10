@@ -95,8 +95,9 @@ class Controller {
 		$("#translateButton").text("fr");
 
 		/**
-		 * Once the translateButton is clicked, it's text will be changed (en->fr or fr->en) depending the current language,
-		 * then every element of class .toTranslate will be translate by changing its text(innerHTML) to the corresponding element in languages objet declared in line 12 of main.js.
+		 * Once the translateButton is clicked, it's text will be changed (en->fr or fr->en) depending on the current language,
+		 * then every element of the class .toTranslate will be translated by changing its text(innerHTML) to the corresponding 
+		 * element in the languages object declared in line 12 of main.js.
 		 */
 		$("#translateButton").click(() => {
 			if (currentLanguage == "en") {
@@ -122,7 +123,7 @@ class Controller {
 		$("#soundControl").append(icon);
 
 		/**
-		 * Toggles between hiding and showing the dropdown list element.
+		 * Toggles between hiding and showing the dropdown list elements.
 		 */
 		$("#globaleSettings").click(() => {
 			let myDropdown = document.getElementById("myDropdown");
@@ -130,7 +131,7 @@ class Controller {
 		});
 
 		/**
-		 * Toggles between the mute icon and volume-up icon depending the if the volume is on.
+		 * Toggles between the mute icon and volume-up icon depending on if the volume is on.
 		 */
 		$("#soundControl").click(() => {
 			audioIsON = !audioIsON;
@@ -160,8 +161,9 @@ class Controller {
 	}
 
 	/**
-	 * This method will be execute everytime we update the Dom,
-	 * since the Dom is changed, it may loses some EventListeners and css propoties that have been setup by setControl at the beginning.
+	 * This method will be executed everytime we update the Dom,
+	 * since the Dom is changed, it may lose some EventListeners and css 
+	 * propreties that have been setup by setControl at the beginning.
 	 */
 	updateControl() {
 		$(".channelName").css("cursor", "pointer");
@@ -205,17 +207,17 @@ let username;
 let sock;
 
 /**
- * Objet view for messages.
+ * View object for messages.
  */
 let messagesView = new MessagesView();
 
 /**
- * Objet view for channels.
+ * View object for channels.
  */
 let channelsView = new ChannelsView();
 
 /**
- * Objet model for messages which will update messagesView.
+ * Model object for messages which will update messagesView.
  */
 let messagesObserver = new MessagesObserver(messagesView);
 
@@ -225,12 +227,12 @@ let messagesObserver = new MessagesObserver(messagesView);
 let channelsObserver = new ChannelsObserver(channelsView);
 
 /**
- * Objet global model which will tell messagesObserver and channelsObserver to update itself.
+ * Global model object which will tell messagesObserver and channelsObserver to update themselves.
  */
 let connectionHandler = new ConnectionHandler(messagesObserver, channelsObserver);
 
 /**
- * Objet ontroller to update models.
+ * Controller object to update the models.
  */
 let controller = new Controller(connectionHandler);
 
