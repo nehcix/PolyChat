@@ -50,9 +50,7 @@ let languages = {
 // ******************************DataBase***********************************
 
 /**
- * @description This object is in the main scope, so by default it has access 
- * to all variables declared in main.js. It contains the connectionHandler which 
- * contains the channels and the messages observer.
+ * @description This object is in the main scope, so by default it has access to all variables declared in main.js. It contains the connectionHandler which contains the channels and the messages observer.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -60,8 +58,7 @@ let languages = {
  */
 class Controller {
 	/**
-	 * @param {object} connectionHandler The controller will update this global model 
-	 * in which the two sub-models are contained.
+	 * @param {object} connectionHandler The controller will update this global model in which the two sub-models are contained.
 	 */
 	constructor(connectionHandler) {
 		this.connectionHandler_ = connectionHandler;

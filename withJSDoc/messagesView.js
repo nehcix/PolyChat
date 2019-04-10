@@ -1,8 +1,7 @@
 "use strict";
 
 /**
- * @description MessagesView represents the view of the messages, it can add a 
- * message to the screen and it can add and remove badges for unread notifications.
+ * @description MessagesView represents the view of the messages, it can add a message to the screen and it can add and remove badges for unread notifications.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -138,11 +137,7 @@ class MessagesView {
 	}
 
 	/**
-	 * First, this method will show a dot badge on the channel (found by channelId) 
-	 * which the current user has joined but is not currently in. 
-	 * Then, it will update the nbBadge. Finally, if there is already a key in nbBadgePerChannel 
-	 * for the corresponding channel (the channel already has an unread message), 
-	 * it will update its value, otherwise, it will create a new key and value.
+	 * First, this method will show a dot badge on the channel (found by channelId) which the current user has joined but is not currently in. Then, it will update the nbBadge. Finally, if there is already a key in nbBadgePerChannel for the corresponding channel (the channel already has an unread message), it will update its value, otherwise, it will create a new key and value.
 	 * @param {string} channelId This parameter represents the id of the channel in question.
 	 */
 	addNewBadge(channelId) {
@@ -167,11 +162,7 @@ class MessagesView {
 	}
 
 	/**
-	 * First, this method will hide the dot badge on the channel (found by channelId) 
-	 * which the current user has joined but is not currently in.
-	 * Then, it will update nbBadge by removing the number of unread messages in 
-	 * the channel in question and update nbBadgePerChannel.
-	 * Finally, it will hide all badges if there's no more unread message
+	 * First, this method will hide the dot badge on the channel (found by channelId) which the current user has joined but is not currently in. Then, it will update nbBadge by removing the number of unread messages in the channel in question and update nbBadgePerChannel. Finally, it will hide all badges if there's no more unread message
 	 * @param {string} channelId This parameter represents the id of the channel in question.
 	 */
 	removeBadgesFrom(channelId) {

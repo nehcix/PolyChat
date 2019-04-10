@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @description ConnectionHandler is the globale model, it contains two sub-models(messagesObserver and channelsObserver). Once it get updated by the controller, it will tell its two sub-models to update the view.
+ * @description ConnectionHandler is the global model. It contains two sub-models(messagesObserver and channelsObserver). Once it gets updated by the controller, it will tell its two sub-models to update their view.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -9,10 +9,9 @@
  */
 class ConnectionHandler {
 	/**
-	 * The constructor takes two models to setup its two sub-models.
-	 * It will also declare a variable lastAnswerFromServer to hold the last answer from the server.
-	 * @param {object} messagesObserver Objet model for messages which will update messagesView.
-	 * @param {object} channelsObserver Objet model for channels which will update messagesView.
+	 * The constructor takes two models to setup its two sub-models. It will also declare a variable lastAnswerFromServer to hold the last answer from the server.
+	 * @param {object} messagesObserver Model Object for messages which will update messagesView.
+	 * @param {object} channelsObserver Model Object for channels which will update channelsView.
 	 */
 	constructor(messagesObserver, channelsObserver) {
 		this.messagesObserver_ = messagesObserver;
@@ -22,8 +21,8 @@ class ConnectionHandler {
 	}
 
 	/**
-	 * This function will ask user the username, then use the username to open the WebSocket.
-	 * The username will also be updated in Dom.
+	 * This function will ask the user for the username. Then, it will use the 
+	 * username to open the WebSocket. The username will also be updated in the Dom.
 	 * Finally, it will define what the WebSocket should do on message.
 	 */
 	newConnection() {
@@ -39,7 +38,8 @@ class ConnectionHandler {
 			this.messagesObserver_.updateView(this.lastAnswerFromServer);
 			this.channelsObserver_.updateView(this.lastAnswerFromServer);
 
-			// We use a promise to be able to wait until the Dom get updated before selecting .toTranslate and make the translation
+			// We use a promise to be able to wait until the Dom gets updated before selecting 
+			// .toTranslate and make the translation
 			Promise.resolve().then(() => {
 				$(".toTranslate").each(function() {
 					$(this).text(languages[currentLanguage][$(this).attr("key")]);
@@ -49,7 +49,8 @@ class ConnectionHandler {
 	}
 
 	/**
-	 * This method will be used to send a message of type onMessage by using the current channel id, the user input in the textarea, the username and the current time.
+	 * This method will be used to send a message of type onMessage by using the 
+	 * current channel id, the user input in the text area, the username and the current time.
 	 */
 	sendInput() {
 		let message = new Message(
@@ -63,7 +64,8 @@ class ConnectionHandler {
 	}
 
 	/**
-	 * This method will be used to send a message of type onMessage by using the current channel id, a Thumbs Up Emoji, the username and the current time.
+	 * This method will be used to send a message of type onMessage by using the 
+	 * current channel id, a Thumbs Up Emoji, the username and the current time.
 	 */
 	sendThumbsUp() {
 		let message = new Message("onMessage", currentChannel.parentElement.id, "👍🏻", username, new Date());
@@ -71,7 +73,7 @@ class ConnectionHandler {
 	}
 
 	/**
-	 * This method will be used to send a message of type onJoinChannel by using the current channel id, the username and the current time. It will also alert user that he has joined the channel once the message is sent.
+	 * This method will be used to send a message of type onJoinChannel by using the current channel id, the username and the current time. It will also alert the user that he has joined the channel once the message is sent.
 	 * @param {object} event user click event
 	 */
 	joinChannel(event) {
@@ -92,7 +94,7 @@ class ConnectionHandler {
 	}
 
 	/**
-	 * This method will verify if the channel of the click target can be selected, if the user haven't join the channel, it will alert the user, ortherwise it will call changeActiveChannel by passing the channel that we want to select.
+	 * This method will verify if the channel of the click target can be selected, if the user hasn't joined the channel, it will alert the user, ortherwise it will call changeActiveChannel by passing the channel that we want to select.
 	 * @param {object} event user click event
 	 */
 	verificationBeforeChange(event) {

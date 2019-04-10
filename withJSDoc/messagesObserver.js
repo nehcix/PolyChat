@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @description MessagesObserver is the sub-model of the globale model(connectionHandler), it contains the messagesView. Once this get poked by the the globale model, it will update the view of messages.
+ * @description MessagesObserver is the sub-model of the global model(connectionHandler), it contains the messagesView. Once this get notified by the the global model, it will update the view of messages.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -9,7 +9,7 @@
  */
 class MessagesObserver {
 	/**
-	 * The constructor takes an objet view to initiate the MessagesObserver.
+	 * The constructor takes a view object view to initiate the MessagesObserver.
 	 * @param {object} messagesView Objet view for messagers.
 	 */
 	constructor(messagesView) {
@@ -23,9 +23,11 @@ class MessagesObserver {
 	updateView(answerFromServer) {
 		switch (answerFromServer.eventType) {
 			/**
-			 * In this case, when the type is onMessage, if the messages if from the current channel, it will be directly add to screen by calling the onMessage method of the messagesView, otherwise, it will add a notification badge.
-			 * Then, if the message isn't sent by the current user, and the message isn't from the administrator, a notification sound will be played.
-			 * Finally, if the message is sent by the current user, the it will empty the textarea.
+			 * In this case, when the type is onMessage, if the message is from the current channel, 
+			 * it will be directly added to screen by calling the onMessage method of the messagesView, 
+			 * otherwise, it will add a notification badge. Then, if the message isn't sent by the 
+			 * current user, and the message isn't from the administrator, a notification sound will be played.
+			 * Finally, if the message is sent by the current user, the it will empty the text area.
 			 */
 			case "onMessage":
 				if (answerFromServer.channelId == currentChannel.parentElement.id) {
@@ -46,7 +48,9 @@ class MessagesObserver {
 				break;
 
 			/**
-			 * In this case, when the type is onGetChannel, all the messages from answerFromServer.data will be added to screen one by one by calling the onMessage method of the messagesView.
+			 * In this case, when the type is onGetChannel, all the messages from 
+			 * answerFromServer.data will be added to screen one by one by calling 
+			 * the onMessage method of the messagesView.
 			 */
 			case "onGetChannel":
 				for (let i = 0; i < answerFromServer.data.messages.length; ++i) {

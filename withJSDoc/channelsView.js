@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @description ChannelsView represents the view of the channels, it updates the channel List and it changes the Active Channel View.
+ * @description ChannelsView represents the view of the channels, it updates the channels List and it changes the Active Channel View.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -9,14 +9,15 @@
  */
 class ChannelsView {
 	/**
-	 * This constructor sets the isNew to true, it means that this channelView is new and have never update the channels list
+	 * This constructor sets the isNew to true, it means that this channelView 
+	 * is new and have never update the channels list
 	 */
 	constructor() {
 		this.isNew = true;
 	}
 
 	/**
-	 *	First, it will remove all channels from the list. Then, it will add channels in which the current user has joined. Then, it will add channels in which the current user hasn't yet joined. Finally, it will call updateControl un the controller to update the control of the controller (because the Dom is modified).
+	 *	First, it will remove all channels from the list. Then, it will add channels in which the current user has joined. Then, it will add channels in which the current user hasn't joined yet. Finally, it will call updateControl on the controller to update the control of the controller (because the Dom is modified).
 	 * @param {object} answerFromServer The answerFromServer holds the answer from the server which got parsed in connectionHandler.
 	 */
 	updateChannelsList(answerFromServer) {
