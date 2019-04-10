@@ -50,7 +50,9 @@ let languages = {
 // ******************************DataBase***********************************
 
 /**
- * @description This object is in the main scope, so by default it has access to all variables declared in main.js, it contains the connectionHandler which contains channels and messages observer.
+ * @description This object is in the main scope, so by default it has access 
+ * to all variables declared in main.js. It contains the connectionHandler which 
+ * contains the channels and the messages observer.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -58,7 +60,8 @@ let languages = {
  */
 class Controller {
 	/**
-	 * @param {object} connectionHandler The controller will update this global model in which contains two sub-models.
+	 * @param {object} connectionHandler The controller will update this global model 
+	 * in which the two sub-models are contained.
 	 */
 	constructor(connectionHandler) {
 		this.connectionHandler_ = connectionHandler;
@@ -66,7 +69,8 @@ class Controller {
 
 	/**
 	 * SetControl will add EventListener to the Dom elements,
-	 * This method will be called on the current object(Controller), and will be executed only once in the end of main.js to setup everything.
+	 * This method will be called on the current object(Controller), and will be 
+	 * executed only once in the end of main.js to setup everything.
 	 */
 	setControl() {
 		sendButton.addEventListener("click", this.connectionHandler_.sendInput);
@@ -95,8 +99,9 @@ class Controller {
 		$("#translateButton").text("fr");
 
 		/**
-		 * Once the translateButton is clicked, it's text will be changed (en->fr or fr->en) depending on the current language,
-		 * then every element of the class .toTranslate will be translated by changing its text(innerHTML) to the corresponding 
+		 * Once the translateButton is clicked, it's text will be changed (en->fr or fr->en) 
+		 * depending on the current language, then every element of the class .toTranslate 
+		 * will be translated by changing its text(innerHTML) to the corresponding 
 		 * element in the languages object declared in line 12 of main.js.
 		 */
 		$("#translateButton").click(() => {

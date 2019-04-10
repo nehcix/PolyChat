@@ -1,7 +1,8 @@
 "use strict";
 
 /**
- * @description MessagesView represents the view of the messages, it can adds a message to screen and it can add and remove badges for unread notifications.
+ * @description MessagesView represents the view of the messages, it can add a 
+ * message to the screen and it can add and remove badges for unread notifications.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -10,8 +11,9 @@
 class MessagesView {
 	/**
 	 * This constructor sets the nbBadge and the nbBadgePerChannel to a new Map.
-	 * The nbBadge represents the total number of unread messages
-	 * The nbBadgePerChannel represents the nubmer of unread messages per channel (key: channel id, value: number of unread messages)
+	 * nbBadge represents the total number of unread messages
+	 * nbBadgePerChannel represents the nubmer of unread messages 
+	 * per channel (key: channel id, value: number of unread messages)
 	 */
 	constructor() {
 		this.nbBadge = 0;
@@ -19,9 +21,10 @@ class MessagesView {
 	}
 
 	/**
-	 * This method add a new message to screen. It appends the message to the list of messages in Dom.
-	 * The style (css) of the message will be diffrent depending on the sender (administrator / current user / other user).
-	 * Finally, it will scroll the scroll bar to the bottom of the message list.
+	 * This method adds a new message to the screen. It appends the message to 
+	 * the list of messages in the Dom. The style (css) of the message will be 
+	 * different depending on the sender (administrator / current user / other user).
+	 * Finally, it will scroll the scroll bar to the bottom of the messages list.
 	 * @param {object} answerFromServer
 	 * @param {string} username
 	 */
@@ -135,10 +138,12 @@ class MessagesView {
 	}
 
 	/**
-	 * First, this method will show a badge dot on the channel (find by channelId) which the current user have joined but not current in.
-	 * Then, it will update the nbBadge.
-	 * Finally, if there already a key in nbBadgePerChannel for the corresponding channel (the channel has already an unread message), it will update its value, wotherwise, it will create a new key and velue.
-	 * @param {string} channelId This variable represents the id of the channel in question.
+	 * First, this method will show a dot badge on the channel (found by channelId) 
+	 * which the current user has joined but is not currently in. 
+	 * Then, it will update the nbBadge. Finally, if there is already a key in nbBadgePerChannel 
+	 * for the corresponding channel (the channel already has an unread message), 
+	 * it will update its value, otherwise, it will create a new key and value.
+	 * @param {string} channelId This parameter represents the id of the channel in question.
 	 */
 	addNewBadge(channelId) {
 		document.getElementById("badge" + channelId).style.display = "inline-block";
@@ -162,10 +167,12 @@ class MessagesView {
 	}
 
 	/**
-	 * First, this method will hide the badge dot on the channel (find by channelId) which the current user have joined but not current in.
-	 * Then, it will update the nbBadge by removing the number of unread message in the channel in question, and updates the nbBadgePerChannel.
+	 * First, this method will hide the dot badge on the channel (found by channelId) 
+	 * which the current user has joined but is not currently in.
+	 * Then, it will update nbBadge by removing the number of unread messages in 
+	 * the channel in question and update nbBadgePerChannel.
 	 * Finally, it will hide all badges if there's no more unread message
-	 * @param {string} channelId This variable represents the id of the channel in question.
+	 * @param {string} channelId This parameter represents the id of the channel in question.
 	 */
 	removeBadgesFrom(channelId) {
 		document.getElementById("badge" + channelId).style.display = "none";
