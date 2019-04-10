@@ -72,6 +72,7 @@ class Controller {
 		sendButton.addEventListener("click", this.connectionHandler_.sendInput);
 		inputToSend.addEventListener("keypress", e => {
 			if (e.key === "Enter") {
+				e.preventDefault();
 				this.connectionHandler_.sendInput();
 			}
 		});
