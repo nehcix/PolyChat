@@ -1,5 +1,5 @@
 /**
- * @description main.js contains the declaration of the class Controller and all the variables will be used later in MVC.
+ * @description main.js contains the declaration of the class Controller and all the variables that will be used later in MVC.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -50,7 +50,7 @@ let languages = {
 // ******************************DataBase***********************************
 
 /**
- * @description This objet is in the main scope, so by default it has asses to all variables declared in main.js, it contains the connectionHandler which contains channels ans messages observer.
+ * @description This object is in the main scope, so by default it has access to all variables declared in main.js, it contains the connectionHandler which contains channels and messages observer.
  * @author Xi Chen Shen
  * @author Hakim Payman
  * @copyright Ecole Polytechnique de Montreal & Course LOG2420
@@ -65,8 +65,8 @@ class Controller {
 	}
 
 	/**
-	 * SetControl will add EventListener to Dom elements,
-	 * This method will be call on the current objet(Controller), and will be execute only once in end of main.js to setup everything.
+	 * SetControl will add EventListener to the Dom elements,
+	 * This method will be called on the current object(Controller), and will be executed only once in the end of main.js to setup everything.
 	 */
 	setControl() {
 		sendButton.addEventListener("click", this.connectionHandler_.sendInput);
@@ -90,7 +90,7 @@ class Controller {
 			.click(this.connectionHandler_.newConnection);
 
 		/**
-		 * The language is setted to french by default.
+		 * The language is set to french by default.
 		 */
 		$("#translateButton").text("fr");
 
